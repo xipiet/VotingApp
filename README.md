@@ -27,7 +27,7 @@ A simple, lightweight voting app to self host, built with **Node.js**, **Express
 ### 1. Clone/download the Repository:
 git clone https://github.com/xipiet/voting-app.git
 
-### 3. Allow powershell to execute the script:
+### 2. Allow powershell to execute the script:
 Set-ExecutionPolicy RemoteSigned
 
 ### 3. Install the requirements:
