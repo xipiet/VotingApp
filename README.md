@@ -44,6 +44,6 @@ node server.js
 
 ### 6. Host the app:
 You have to portforward the port "3000" to give other users access through your router.
-Now give them your portforwarded port with the ip. It should look like "<<yourIp>>:3000"
+Now give them your portforwarded port with the ip. It should look like "<yourIp>:3000"
 To access the admin panel just add "/admin.html" to the url
 
