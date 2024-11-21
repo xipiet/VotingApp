@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voting</title>
+</head>
+<body>
+    <h1>Voting</h1>
+    <div id="candidates"></div>
+    <button onclick="getResults()">Show Results</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io(); // Connect to WebSocket server
+
+        socket.on('refresh', () => {
+            location.reload(); // Refresh the page when triggered by the server
+        });
+
+        async function loadCandidates() {
+            const res = await fetch('/candidates');
+            const data = await res.json();
+            const candidateDiv = document.getElementById('candidates');
+            candidateDiv.innerHTML = '';
+            if (data.votingOpen) {
+                data.candidates.forEach(name => {
+                    candidateDiv.innerHTML += `<button onclick="vote('${name}')">${name}</button><br>`;
+                });
+            } else {
+                candidateDiv.innerHTML = "Voting is closed.";
+            }
+        }
+
+        async function vote(name) {
+            const res = await fetch('/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const message = await res.text();
+            alert(message);
+        }
+
+        async function getResults() {
+            const res = await fetch('/results');
+            const data = await res.json();
+            let results = "Results:\n";
+            for (const [name, votes] of Object.entries(data)) {
+                results += `${name}: ${votes} votes\n`;
+            }
+            alert(results);
+        }
+
+        loadCandidates();
+    </script>
+</body>
+</html>
