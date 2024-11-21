@@ -32,7 +32,9 @@ Set-ExecutionPolicy RemoteSigned
 
 ### 3. Install the requirements:
 -Download the LTS-Version from https://nodejs.org/en
+-npm install 
 -npm install express body-parser
+-npm install socket.io
 
 ### 4. Navigate to the folder:
 cd yourPath/VotingApp
